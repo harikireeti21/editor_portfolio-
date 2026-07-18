@@ -1,8 +1,11 @@
 /* Design System & Variables */
 :root {
     --bg-primary: #070709;
+    --bg-primary-rgb: 7, 7, 9;
     --bg-secondary: #0d0d11;
+    --bg-secondary-rgb: 13, 13, 17;
     --bg-tertiary: #131317;
+    --bg-tertiary-rgb: 19, 19, 23;
     --accent: #ff2e5f;
     --accent-rgb: 255, 46, 95;
     --accent-hover: #e51b4c;
@@ -143,7 +146,7 @@ a {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(var(--bg-primary), 0.7);
+    background: rgba(var(--bg-primary-rgb), 0.7);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-glass);
     transition: var(--transition-smooth);
@@ -151,7 +154,7 @@ a {
 
 .main-header.scrolled {
     padding: 10px 0;
-    background: rgba(var(--bg-primary), 0.85);
+    background: rgba(var(--bg-primary-rgb), 0.85);
 }
 
 .header-container {
@@ -245,6 +248,16 @@ a {
     color: var(--text-main);
     font-size: 1.5rem;
     cursor: pointer;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color var(--transition-fast);
+}
+
+.mobile-menu-btn:hover {
+    background-color: var(--bg-glass-hover);
 }
 
 /* Mobile Nav Overlay */
@@ -254,7 +267,7 @@ a {
     left: 100%;
     width: 100%;
     height: 100%;
-    background: rgba(var(--bg-primary), 0.98);
+    background: rgba(var(--bg-primary-rgb), 0.98);
     backdrop-filter: blur(20px);
     z-index: 1001;
     display: flex;
@@ -273,10 +286,22 @@ a {
     position: absolute;
     top: 25px;
     right: 25px;
-    background: none;
-    border: none;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 50%;
     color: var(--text-main);
     cursor: pointer;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.mobile-close-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
 }
 
 .mobile-links {
@@ -495,7 +520,7 @@ a {
 /* Floating Badges */
 .floating-badge {
     position: absolute;
-    background: rgba(var(--bg-secondary), 0.6);
+    background: rgba(var(--bg-secondary-rgb), 0.6);
     backdrop-filter: blur(15px);
     border: 1px solid var(--border-glass);
     padding: 12px 18px;
@@ -863,7 +888,7 @@ section {
 .item-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(var(--bg-primary), 0.6);
+    background: rgba(var(--bg-primary-rgb), 0.6);
     backdrop-filter: blur(8px);
     display: flex;
     flex-direction: column;
@@ -1380,7 +1405,7 @@ section {
 .video-loader {
     position: absolute;
     inset: 0;
-    background: rgba(var(--bg-primary), 0.8);
+    background: rgba(var(--bg-primary-rgb), 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1408,6 +1433,12 @@ section {
 }
 
 /* Media Queries & Responsiveness */
+@media (hover: none) {
+    .custom-cursor, .custom-cursor-glow {
+        display: none !important;
+    }
+}
+
 @media (max-width: 1024px) {
     .hero-title {
         font-size: 3.5rem;
@@ -1429,7 +1460,7 @@ section {
     }
     
     .mobile-menu-btn {
-        display: block;
+        display: flex;
     }
     
     .hero-container {
@@ -1467,11 +1498,28 @@ section {
     .about-stats-grid {
         order: -1;
     }
+    
+    .custom-cursor, .custom-cursor-glow {
+        display: none !important;
+    }
 }
 
 @media (max-width: 600px) {
+    section {
+        padding: 60px 20px;
+    }
+    
+    .section-header {
+        margin-bottom: 30px;
+    }
+    
+    .hero-section {
+        padding-top: 100px;
+        padding-bottom: 40px;
+    }
+    
     .hero-title {
-        font-size: 2.8rem;
+        font-size: clamp(2.2rem, 10vw, 3.2rem);
     }
     
     .hero-actions {
@@ -1484,8 +1532,82 @@ section {
         justify-content: center;
     }
     
+    .hero-frame {
+        width: 280px;
+        height: 320px;
+    }
+    
+    .floating-badge {
+        padding: 8px 12px;
+        gap: 8px;
+        border-radius: 10px;
+    }
+    
+    .floating-badge img {
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 8px !important;
+    }
+    
+    .floating-badge h4 {
+        font-size: 0.8rem;
+    }
+    
+    .floating-badge p {
+        font-size: 0.7rem;
+    }
+    
+    .badge-1 {
+        left: 0;
+        top: 10%;
+    }
+    
+    .badge-2 {
+        right: 0;
+        bottom: 10%;
+    }
+    
+    .scroll-indicator {
+        display: none;
+    }
+    
     .section-title {
         font-size: 2.2rem;
+    }
+    
+    .skill-card {
+        padding: 20px;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    
+    .timeline-line {
+        left: 15px;
+    }
+    
+    .timeline-item {
+        padding-left: 35px;
+        margin-bottom: 30px;
+    }
+    
+    .timeline-marker {
+        left: 6px;
+        top: 20px;
+    }
+    
+    .timeline-card {
+        padding: 20px;
+    }
+    
+    .timeline-card:hover {
+        transform: none;
+    }
+    
+    .form-group input, .form-group textarea {
+        font-size: 16px;
     }
     
     .contact-form-container {
@@ -1502,7 +1624,42 @@ section {
         text-align: center;
     }
     
-    .custom-cursor, .custom-cursor-glow {
-        display: none; /* disable custom cursor on small viewports */
+    /* Responsive Video Lightbox Modal */
+    .video-modal.ratio-vertical .video-container {
+        height: 70vh;
+        aspect-ratio: 9 / 16;
+        width: auto;
+        max-width: 90vw;
+        border: 6px solid rgba(255, 255, 255, 0.15);
+        border-radius: 28px;
+    }
+    
+    .video-modal.ratio-horizontal .video-container {
+        width: 90vw;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        max-height: 70vh;
+    }
+    
+    .video-close-btn {
+        top: 15px;
+        right: 15px;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 20px 15px;
+    }
+    
+    .stat-num {
+        font-size: 2.5rem;
     }
 }
